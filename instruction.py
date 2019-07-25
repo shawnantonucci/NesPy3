@@ -13,3 +13,11 @@ class Instruction(ABC):
 class LDAInstruction(Instruction):
     def process(self):
         super().process()
+
+class SEIInstruction(Instruction):
+    def process(self):
+        super().process()
+
+class CLDInstruction(Instruction):
+    def process(self):
+        super().process()

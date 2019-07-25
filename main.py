@@ -17,7 +17,7 @@ def main():
     with open(args.rom_path, "rb") as file:
         rom_bytes = file.read()
 
-    rom = ROM(list(rom_bytes))
+    rom = ROM(rom_bytes)
 
     # create cpu
     cpu = CPU()

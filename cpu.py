@@ -1,4 +1,4 @@
-from instruction import LDAInstruction
+from instruction import LDAInstruction, SEIInstruction, CLDInstruction
 from rom import ROM
 
 
@@ -12,7 +12,9 @@ class CPU(object):
         self.pc = None
 
         self.instruction_mapping = {
-            169: LDAInstruction
+            bytes.fromhex("78"): SEIInstruction,
+            bytes.fromhex("D8"): CLDInstruction,
+            bytes.fromhex("A9"): LDAInstruction
         }
 
         self.rom = None
