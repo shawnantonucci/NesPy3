@@ -6,3 +6,4 @@ class CPU(object):
     def process_instruction(self, instruction: bytes):
         # TODO process instruction
         print(instruction)
+
