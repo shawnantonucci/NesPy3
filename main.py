@@ -1,5 +1,6 @@
 import argparse
 
+from cpu import CPU
 
 def main():
     # Setup command line argument parser
@@ -14,11 +15,14 @@ def main():
     # TODO validate rom path is correct
     print(args.rom_path)
 
-
+    # Load rom
     with open(args.rom_path, "rb") as file:
-        print(file.readlines())
+        lines = file.readlines()
 
-    pass
+    # create cpu
+    cpu = CPU()
+
+    cpu.process_instruction(lines[0][0:3])
 
 
 if __name__ == "__main__":
