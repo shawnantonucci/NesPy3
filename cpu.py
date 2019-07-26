@@ -31,6 +31,13 @@ class CPU(object):
             indentifier_byte = self.rom.get_byte(self.pc)
 
             # turn byte into instruction
-            instruction = self.instruction_mapping.get(indentifier_byte, None)
-            if instruction is None:
+            instruction_class = self.instruction_mapping.get(
+                indentifier_byte, None)
+            if instruction_class is None:
                 raise Exception("Instruction not found")
+
+            # We have a valid instruction class
+            instruction = instruction_class(indentifier_byte)
+            instruction.execute()
+
+            self.pc += instruction.instruction_length
