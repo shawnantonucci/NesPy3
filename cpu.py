@@ -7,11 +7,18 @@ from rom import ROM
 class CPU(object):
     def __init__(self):
         # TODO proper registers
-        self.registers = []
+        # Status Registers
+        self.pc_reg = None # Program counter
+        self.sp_reg = None # Stack pointer
+        self.p_reg = None # Status register
+
+        # Data registers
+        self.x_reg = None
+        self.y_reg = None
+        self.a_reg = None
 
         # program counter stores current execution point
         self.running = True
-        self.pc = None
 
         self.instruction_classes = [
             SEIInstruction,
@@ -28,13 +35,13 @@ class CPU(object):
     def run_rom(self, rom: ROM):
         # load rom
         self.rom = rom
-        self.pc = self.rom.header_size
+        # self.pc_reg = self.rom.header_size
 
         # run program
         self.running = True
         while self.running:
             # get current byte
-            indentifier_byte = self.rom.get_byte(self.pc)
+            indentifier_byte = self.rom.get_byte(self.pc_reg)
 
             # turn byte into instruction
             instruction_class = self.instruction_class_mapping.get(
@@ -46,4 +53,4 @@ class CPU(object):
             instruction = instruction_class()
             instruction.execute()
 
-            self.pc += instruction.instruction_length
+            self.pc_reg += instruction.instruction_length
